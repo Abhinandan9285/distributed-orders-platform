@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import order_service.constant.OrderStatus;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "orders")
 @Data
@@ -16,8 +18,8 @@ import order_service.constant.OrderStatus;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     private String productCode;
 

@@ -16,17 +16,15 @@ public class InventoryEventConsumer {
 
     private final OrderService orderService;
 
-    @RabbitListener(queues = RabbitMQConfig.INVENTORY_SUCCESS_QUEUE)
-    public void consumeInventoryReservedEvent(InventoryReservedEvent event) {
+//    @RabbitListener(queues = RabbitMQConfig.INVENTORY_SUCCESS_QUEUE)
+//    public void consumeInventoryReservedEvent(InventoryReservedEvent event) {
+//
+//        log.info("Inventory Reserved Event Received : {}", event);
+//
+//        orderService.markOrderConfirmed(event.getOrderId());
+//    }
 
-        log.info("Inventory Reserved Event Received : {}", event);
-
-        orderService.markOrderConfirmed(event.getOrderId());
-    }
-
-    @RabbitListener(
-            queues = RabbitMQConfig.INVENTORY_FAILED_QUEUE
-    )
+    @RabbitListener(queues = RabbitMQConfig.INVENTORY_FAILED_QUEUE)
     public void consumeInventoryFailedEvent(InventoryFailedEvent event) {
 
         log.info("Inventory Failed Event Received : {}", event);

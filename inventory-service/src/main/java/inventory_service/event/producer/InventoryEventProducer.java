@@ -14,10 +14,18 @@ public class InventoryEventProducer {
     private final RabbitTemplate rabbitTemplate;
 
     public void publishSuccessEvent(InventoryReservedEvent event) {
-        rabbitTemplate.convertAndSend(RabbitMQConfig.INVENTORY_SUCCESS_QUEUE, event);
+        rabbitTemplate.convertAndSend(
+                RabbitMQConfig.ORDER_EXCHANGE,
+                RabbitMQConfig.INVENTORY_SUCCESS_ROUTING_KEY,
+                event
+        );
     }
 
     public void publishFailureEvent(InventoryFailedEvent event) {
-        rabbitTemplate.convertAndSend(RabbitMQConfig.INVENTORY_FAILED_QUEUE, event);
+        rabbitTemplate.convertAndSend(
+                RabbitMQConfig.ORDER_EXCHANGE,
+                RabbitMQConfig.INVENTORY_FAILED_ROUTING_KEY,
+                event
+        );
     }
 }

@@ -3,8 +3,10 @@ package order_service.service;
 import order_service.dto.request.CreateOrderRequest;
 import order_service.dto.response.OrderResponse;
 
+import java.util.UUID;
+
 public interface OrderService {
     OrderResponse createOrder(CreateOrderRequest request);
-    void markOrderConfirmed(Long orderId);
-    void markOrderFailed(Long orderId, String reason);
+    void markOrderConfirmed(UUID orderId);
+    void markOrderFailed(UUID orderId, String reason);
 }

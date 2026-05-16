@@ -12,6 +12,8 @@ import order_service.repository.OrderRepository;
 import order_service.service.OrderService;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -47,7 +49,7 @@ public class OrderServiceImpl implements  OrderService {
     }
 
     @Override
-    public void markOrderConfirmed(Long orderId) {
+    public void markOrderConfirmed(UUID orderId) {
 
         Order order = orderRepository.findById(orderId)
                         .orElseThrow(() -> new RuntimeException("Order not found"));
@@ -57,7 +59,7 @@ public class OrderServiceImpl implements  OrderService {
     }
 
     @Override
-    public void markOrderFailed(Long orderId, String reason) {
+    public void markOrderFailed(UUID orderId, String reason) {
 
         Order order = orderRepository.findById(orderId)
                         .orElseThrow(() -> new RuntimeException("Order not found"));

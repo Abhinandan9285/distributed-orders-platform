@@ -1,19 +1,19 @@
-package order_service.dto.response;
+package payment_service.event.payload;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
 @Data
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class OrderResponse {
+@AllArgsConstructor
+public class InventoryReservedEvent {
 
     private UUID orderId;
 
-    private String status;
+    private String productCode;
+
+    private Integer quantity;
 }
