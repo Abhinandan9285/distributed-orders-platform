@@ -17,8 +17,7 @@ public class PaymentEventConsumer {
 
     @RabbitListener(queues = RabbitMQConfig.INVENTORY_SUCCESS_QUEUE)
     public void processPayment(InventoryReservedEvent event) {
-        log.info("Inventory success event received : {}", event.getOrderId());
-
+        log.info("Inventory success event received : {}", event);
         paymentService.processPayment(event);
     }
 }

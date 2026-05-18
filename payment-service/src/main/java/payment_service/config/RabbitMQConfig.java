@@ -27,7 +27,7 @@ public class RabbitMQConfig {
 
     public static final String PAYMENT_FAILED_QUEUE = "payment.failed.queue";
 
-
+    public static final String INVENTORY_ROLLBACK_QUEUE = "inventory.rollback.queue";
     /*
      * Routing Keys
      */
@@ -37,12 +37,17 @@ public class RabbitMQConfig {
 
     public static final String PAYMENT_FAILED_ROUTING_KEY = "payment.failed.routing.key";
 
+    public static final String INVENTORY_ROLLBACK_ROUTING_KEY = "inventory.rollback.routing.key";
 
     @Bean
     public DirectExchange orderExchange() {
         return new DirectExchange(ORDER_EXCHANGE);
     }
 
+    @Bean
+    public Queue inventoryRollbackQueue() {
+        return new Queue(INVENTORY_ROLLBACK_QUEUE);
+    }
 
     @Bean
     public Queue inventorySuccessQueue() {
@@ -71,7 +76,13 @@ public class RabbitMQConfig {
                 .to(orderExchange)
                 .with(INVENTORY_SUCCESS_ROUTING_KEY);
     }
-
+    @Bean
+    public Binding inventoryRollbackBinding(@Qualifier("inventoryRollbackQueue") Queue inventoryRollbackQueue, DirectExchange orderExchange) {
+        return BindingBuilder
+                .bind(inventoryRollbackQueue)
+                .to(orderExchange)
+                .with(INVENTORY_ROLLBACK_ROUTING_KEY);
+    }
 
     @Bean
     public Binding paymentSuccessBinding( @Qualifier("paymentSuccessQueue") Queue paymentSuccessQueue, DirectExchange orderExchange) {

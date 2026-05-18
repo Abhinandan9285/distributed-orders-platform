@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import payment_service.constant.PaymentStatus;
 import payment_service.entity.Payment;
 import payment_service.event.payload.InventoryReservedEvent;
+import payment_service.event.payload.InventoryRollbackEvent;
 import payment_service.event.payload.PaymentFailedEvent;
 import payment_service.event.payload.PaymentSuccessEvent;
 import payment_service.event.producer.PaymentEventProducer;
@@ -48,8 +49,6 @@ public class PaymentServiceImpl implements PaymentService {
                     )
             );
 
-            log.info("Payment SUCCESS for order : {}", event.getOrderId());
-
         } else {
 
             Payment payment = Payment.builder()
@@ -67,7 +66,13 @@ public class PaymentServiceImpl implements PaymentService {
                     )
             );
 
-            log.info("Payment FAILED for order : {}", event.getOrderId());
+            paymentEventProducer.publishInventoryRollBackEvent(
+                    new InventoryRollbackEvent(
+                    event.getOrderId(),
+                    event.getProductCode(),
+                    event.getQuantity()
+            ));
+
         }
     }
 }

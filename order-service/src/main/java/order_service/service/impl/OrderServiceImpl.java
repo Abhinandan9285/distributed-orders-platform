@@ -2,6 +2,7 @@ package order_service.service.impl;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import order_service.constant.OrderStatus;
 import order_service.dto.request.CreateOrderRequest;
 import order_service.dto.response.OrderResponse;
@@ -17,6 +18,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class OrderServiceImpl implements  OrderService {
 
     private final OrderRepository orderRepository;
@@ -41,6 +43,8 @@ public class OrderServiceImpl implements  OrderService {
                         savedOrder.getQuantity());
 
         producer.publishOrderCreatedEvent(event);
+
+        log.info("Order created and published with Order: {}",event);
 
         return OrderResponse.builder()
                 .orderId(savedOrder.getId())

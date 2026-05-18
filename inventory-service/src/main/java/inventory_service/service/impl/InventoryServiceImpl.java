@@ -3,8 +3,9 @@ package inventory_service.service.impl;
 import inventory_service.entity.Inventory;
 import inventory_service.event.payload.InventoryFailedEvent;
 import inventory_service.event.payload.InventoryReservedEvent;
+import inventory_service.event.payload.InventoryRollbackEvent;
 import inventory_service.event.payload.OrderCreatedEvent;
-import inventory_service.event.producer.InventoryEventProducer;
+import inventory_service.event.producer.InventoryReserveProducer;
 import inventory_service.repository.InventoryRepository;
 import inventory_service.service.InventoryService;
 import jakarta.transaction.Transactional;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class InventoryServiceImpl implements InventoryService {
 
     private final InventoryRepository inventoryRepository;
-    private final InventoryEventProducer producer;
+    private final InventoryReserveProducer producer;
 
     @Override
     public void reserveInventory(OrderCreatedEvent event) {
@@ -39,5 +40,15 @@ public class InventoryServiceImpl implements InventoryService {
         } catch (Exception ex) {
             producer.publishFailureEvent(new InventoryFailedEvent(event.getOrderId(), ex.getMessage()));
         }
+    }
+
+    @Override
+    public void restoreInventory(InventoryRollbackEvent event) {
+        Inventory inventory = inventoryRepository.findByProductCode(event.getProductCode()).orElseThrow(() -> new RuntimeException("Product not found"));
+
+        inventory.setAvailableQuantity(inventory.getAvailableQuantity() + event.getQuantity());
+        inventoryRepository.save(inventory);
+
+        log.info("Inventory restored for product event: {}", event);
     }
 }
