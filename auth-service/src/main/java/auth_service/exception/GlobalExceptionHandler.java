@@ -1,7 +1,8 @@
 package auth_service.exception;
 
-import auth_service.dto.ErrorResponseDto;
-import lombok.Builder;
+import common_lib.dto.response.ErrorResponseDto;
+import common_lib.exception.BadRequestException;
+import common_lib.exception.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

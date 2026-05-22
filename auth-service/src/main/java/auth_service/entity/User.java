@@ -1,6 +1,6 @@
 package auth_service.entity;
 
-import auth_service.constant.Role;
+import common_lib.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 

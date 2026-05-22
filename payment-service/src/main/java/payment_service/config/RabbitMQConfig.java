@@ -10,34 +10,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import static common_lib.constant.RabbitMQConstants.*;
+
 @Configuration
 public class RabbitMQConfig {
-
-    /*
-     * Exchanges
-     */
-    public static final String ORDER_EXCHANGE = "order.exchange";
-
-    /*
-     * Queues
-     */
-    public static final String INVENTORY_SUCCESS_QUEUE = "inventory.success.queue";
-
-    public static final String PAYMENT_SUCCESS_QUEUE = "payment.success.queue";
-
-    public static final String PAYMENT_FAILED_QUEUE = "payment.failed.queue";
-
-    public static final String INVENTORY_ROLLBACK_QUEUE = "inventory.rollback.queue";
-    /*
-     * Routing Keys
-     */
-    public static final String INVENTORY_SUCCESS_ROUTING_KEY = "inventory.success.routing.key";
-
-    public static final String PAYMENT_SUCCESS_ROUTING_KEY = "payment.success.routing.key";
-
-    public static final String PAYMENT_FAILED_ROUTING_KEY = "payment.failed.routing.key";
-
-    public static final String INVENTORY_ROLLBACK_ROUTING_KEY = "inventory.rollback.routing.key";
 
     @Bean
     public DirectExchange orderExchange() {

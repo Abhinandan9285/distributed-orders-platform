@@ -1,17 +1,15 @@
 package auth_service.service.impl;
 
-import auth_service.config.SecurityConfig;
-import auth_service.dto.LoginRequest;
-import auth_service.dto.RegisterRequest;
+import auth_service.dto.request.LoginRequest;
+import auth_service.dto.request.RegisterRequest;
 import auth_service.entity.User;
-import auth_service.exception.BadRequestException;
-import auth_service.exception.ResourceNotFoundException;
 import auth_service.repository.UserRepository;
 import auth_service.service.IAuthService;
 import auth_service.service.IJwtService;
+import common_lib.exception.BadRequestException;
+import common_lib.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

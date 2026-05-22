@@ -1,9 +1,9 @@
 package order_service.controller;
 
+import common_lib.dto.response.OrderResponse;
 import lombok.RequiredArgsConstructor;
-import order_service.dto.OrderDetailsResponse;
+import order_service.dto.response.OrderDetailsResponse;
 import order_service.dto.request.CreateOrderRequest;
-import order_service.dto.response.OrderResponse;
 import order_service.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

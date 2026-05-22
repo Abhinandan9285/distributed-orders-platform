@@ -1,11 +1,11 @@
 package order_service.entity;
 
+import common_lib.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import order_service.constant.OrderStatus;
 
 import java.util.UUID;
 

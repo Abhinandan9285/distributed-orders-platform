@@ -9,6 +9,11 @@
     </parent>
 	<artifactId>inventory-service</artifactId>
 	<dependencies>
+        <dependency>
+            <groupId>com.platform</groupId>
+            <artifactId>common-lib</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>

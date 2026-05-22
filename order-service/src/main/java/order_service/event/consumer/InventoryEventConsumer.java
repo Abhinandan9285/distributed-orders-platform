@@ -1,13 +1,14 @@
 package order_service.event.consumer;
 
+import common_lib.event.InventoryFailedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import order_service.config.RabbitMQConfig;
-import order_service.event.payload.InventoryFailedEvent;
-import order_service.event.payload.InventoryReservedEvent;
 import order_service.service.OrderService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
+
+import static common_lib.constant.RabbitMQConstants.INVENTORY_FAILED_QUEUE;
 
 @Service
 @RequiredArgsConstructor
@@ -16,15 +17,7 @@ public class InventoryEventConsumer {
 
     private final OrderService orderService;
 
-//    @RabbitListener(queues = RabbitMQConfig.INVENTORY_SUCCESS_QUEUE)
-//    public void consumeInventoryReservedEvent(InventoryReservedEvent event) {
-//
-//        log.info("Inventory Reserved Event Received : {}", event);
-//
-//        orderService.markOrderConfirmed(event.getOrderId());
-//    }
-
-    @RabbitListener(queues = RabbitMQConfig.INVENTORY_FAILED_QUEUE)
+    @RabbitListener(queues = INVENTORY_FAILED_QUEUE)
     public void consumeInventoryFailedEvent(InventoryFailedEvent event) {
 
         log.info("Inventory Failed Event Received : {}", event);

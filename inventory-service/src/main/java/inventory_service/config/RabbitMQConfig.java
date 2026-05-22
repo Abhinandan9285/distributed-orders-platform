@@ -10,29 +10,31 @@ import org.springframework.retry.annotation.CircuitBreaker;
 
 import java.util.HashMap;
 
+import static common_lib.constant.RabbitMQConstants.*;
+
 @Configuration
 public class RabbitMQConfig {
-
-    /*
-     * Exchange
-     */
-    public static final String ORDER_EXCHANGE = "order.exchange";
-
-    /*
-     * Queues
-     */
-    public static final String ORDER_QUEUE = "order.queue";
-    public static final String INVENTORY_SUCCESS_QUEUE = "inventory.success.queue";
-    public static final String INVENTORY_FAILED_QUEUE = "inventory.failed.queue";
-    public static final String INVENTORY_ROLLBACK_QUEUE = "inventory.rollback.queue";
-
-    /*
-     * Routing Keys
-     */
-    public static final String ORDER_ROUTING_KEY = "order.routing.key";
-    public static final String INVENTORY_SUCCESS_ROUTING_KEY = "inventory.success.routing.key";
-    public static final String INVENTORY_FAILED_ROUTING_KEY = "inventory.failed.routing.key";
-    public static final String INVENTORY_ROLLBACK_ROUTING_KEY = "inventory.rollback.routing.key";
+//
+//    /*
+//     * Exchange
+//     */
+//    public static final String ORDER_EXCHANGE = "order.exchange";
+//
+//    /*
+//     * Queues
+//     */
+//    public static final String ORDER_QUEUE = "order.queue";
+//    public static final String INVENTORY_SUCCESS_QUEUE = "inventory.success.queue";
+//    public static final String INVENTORY_FAILED_QUEUE = "inventory.failed.queue";
+//    public static final String INVENTORY_ROLLBACK_QUEUE = "inventory.rollback.queue";
+//
+//    /*
+//     * Routing Keys
+//     */
+//    public static final String ORDER_ROUTING_KEY = "order.routing.key";
+//    public static final String INVENTORY_SUCCESS_ROUTING_KEY = "inventory.success.routing.key";
+//    public static final String INVENTORY_FAILED_ROUTING_KEY = "inventory.failed.routing.key";
+//    public static final String INVENTORY_ROLLBACK_ROUTING_KEY = "inventory.rollback.routing.key";
 
     @Bean
     public DirectExchange orderExchange() {

@@ -1,25 +1,24 @@
 package order_service.service.impl;
 
+import common_lib.enums.OrderStatus;
+import common_lib.dto.response.InventoryResponse;
+import common_lib.dto.response.OrderResponse;
+import common_lib.dto.response.PaymentResponse;
+import common_lib.event.OrderConfirmedEvent;
+import common_lib.event.OrderCreatedEvent;
+import common_lib.event.OrderFailedEvent;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import order_service.constant.OrderStatus;
-import order_service.dto.InventoryResponse;
-import order_service.dto.OrderDetailsResponse;
-import order_service.dto.PaymentResponse;
+import order_service.dto.response.OrderDetailsResponse;
 import order_service.dto.request.CreateOrderRequest;
-import order_service.dto.response.OrderResponse;
 import order_service.entity.Order;
-import order_service.event.payload.OrderConfirmedEvent;
-import order_service.event.payload.OrderCreatedEvent;
-import order_service.event.payload.OrderFailedEvent;
 import order_service.event.producer.NotificationEventProducer;
 import order_service.event.producer.OrderEventProducer;
 import order_service.repository.OrderRepository;
 import order_service.service.OrderService;
 import order_service.service.feign.InventoryFeignClient;
 import order_service.service.feign.PaymentFeignClient;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;

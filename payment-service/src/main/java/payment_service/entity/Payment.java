@@ -1,8 +1,8 @@
 package payment_service.entity;
 
+import common_lib.enums.PaymentStatus;
 import jakarta.persistence.*;
 import lombok.*;
-import payment_service.constant.PaymentStatus;
 
 import java.util.UUID;
 

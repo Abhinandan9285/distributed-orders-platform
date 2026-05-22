@@ -1,8 +1,8 @@
     package auth_service.config;
 
     import auth_service.entity.User;
-    import auth_service.exception.ResourceNotFoundException;
     import auth_service.repository.UserRepository;
+    import common_lib.exception.ResourceNotFoundException;
     import lombok.RequiredArgsConstructor;
     import lombok.extern.slf4j.Slf4j;
     import org.springframework.security.core.GrantedAuthority;

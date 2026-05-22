@@ -1,10 +1,11 @@
 package inventory_service.service.impl;
 
+import common_lib.dto.response.InventoryResponse;
+import common_lib.event.InventoryFailedEvent;
+import common_lib.event.InventoryReservedEvent;
+import common_lib.event.InventoryRollbackEvent;
+import common_lib.event.OrderCreatedEvent;
 import inventory_service.entity.Inventory;
-import inventory_service.event.payload.InventoryFailedEvent;
-import inventory_service.event.payload.InventoryReservedEvent;
-import inventory_service.event.payload.InventoryRollbackEvent;
-import inventory_service.event.payload.OrderCreatedEvent;
 import inventory_service.event.producer.InventoryReserveProducer;
 import inventory_service.repository.InventoryRepository;
 import inventory_service.service.InventoryService;
@@ -50,5 +51,17 @@ public class InventoryServiceImpl implements InventoryService {
         inventoryRepository.save(inventory);
 
         log.info("Inventory restored for product event: {}", event);
+    }
+
+    @Override
+    public InventoryResponse getInventory(String productCode) {
+        Inventory inventory = inventoryRepository
+                .findByProductCode(productCode)
+                .orElse(new Inventory());
+
+        return new InventoryResponse(
+                inventory.getProductCode(),
+                inventory.getAvailableQuantity()
+        );
     }
 }

@@ -1,7 +1,7 @@
 package auth_service.controller;
 
-import auth_service.dto.LoginRequest;
-import auth_service.dto.RegisterRequest;
+import auth_service.dto.request.LoginRequest;
+import auth_service.dto.request.RegisterRequest;
 import auth_service.service.IAuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

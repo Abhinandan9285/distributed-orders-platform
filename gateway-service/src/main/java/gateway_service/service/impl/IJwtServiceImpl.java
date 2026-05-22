@@ -1,7 +1,6 @@
 package gateway_service.service.impl;
 
 import gateway_service.service.IJwtService;
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,9 +16,9 @@ public class IJwtServiceImpl implements IJwtService {
     private String secretKey;
 
 
-    public Claims extractClaims(String token) {
+    public void extractClaims(String token) {
         SecretKey key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
-        return Jwts.parser()
+        Jwts.parser()
                 .verifyWith(key)
                 .build()
                 .parseSignedClaims(token)

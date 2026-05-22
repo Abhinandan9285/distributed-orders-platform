@@ -1,20 +1,22 @@
 package payment_service.service.impl;
 
+import common_lib.dto.response.PaymentResponse;
+import common_lib.enums.PaymentStatus;
+import common_lib.event.InventoryReservedEvent;
+import common_lib.event.InventoryRollbackEvent;
+import common_lib.event.PaymentFailedEvent;
+import common_lib.event.PaymentSuccessEvent;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import payment_service.constant.PaymentStatus;
 import payment_service.entity.Payment;
-import payment_service.event.payload.InventoryReservedEvent;
-import payment_service.event.payload.InventoryRollbackEvent;
-import payment_service.event.payload.PaymentFailedEvent;
-import payment_service.event.payload.PaymentSuccessEvent;
 import payment_service.event.producer.PaymentEventProducer;
 import payment_service.repository.PaymentRepository;
 import payment_service.service.PaymentService;
 
 import java.util.Random;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -74,5 +76,16 @@ public class PaymentServiceImpl implements PaymentService {
             ));
 
         }
+    }
+
+    @Override
+    public PaymentResponse getPayment(UUID orderId) {
+        Payment payment = paymentRepository.findByOrderId(orderId).orElse(new Payment());
+
+        return new PaymentResponse(
+                payment.getOrderId(),
+                payment.getAmount(),
+                payment.getStatus()
+        );
     }
 }

@@ -1,8 +1,8 @@
 package order_service.service;
 
-import order_service.dto.OrderDetailsResponse;
+import common_lib.dto.response.OrderResponse;
+import order_service.dto.response.OrderDetailsResponse;
 import order_service.dto.request.CreateOrderRequest;
-import order_service.dto.response.OrderResponse;
 
 import java.util.UUID;
 

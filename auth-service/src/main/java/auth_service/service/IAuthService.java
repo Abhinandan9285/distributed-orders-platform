@@ -1,7 +1,7 @@
 package auth_service.service;
 
-import auth_service.dto.LoginRequest;
-import auth_service.dto.RegisterRequest;
+import auth_service.dto.request.LoginRequest;
+import auth_service.dto.request.RegisterRequest;
 import org.springframework.http.ResponseEntity;
 
 public interface IAuthService {

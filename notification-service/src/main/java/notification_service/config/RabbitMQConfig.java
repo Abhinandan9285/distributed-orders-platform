@@ -7,16 +7,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import static common_lib.constant.RabbitMQConstants.*;
+
 @Configuration
 public class RabbitMQConfig {
-
-    public static final String ORDER_EXCHANGE = "order.exchange";
-    public static final String ORDER_CONFIRMED_NOTIFICATION_QUEUE = "order.confirmed.notification.queue";
-    public static final String ORDER_FAILED_NOTIFICATION_QUEUE = "order.failed.notification.queue";
-
-
-    public static final String ORDER_CONFIRMED_ROUTING_KEY = "order.confirmed.routing.key";
-    public static final String ORDER_FAILED_ROUTING_KEY = "order.failed.routing.key";
 
 
     @Bean
